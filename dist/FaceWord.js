@@ -42,7 +42,7 @@ FaceWord = (function () {
     var promise;
 
     promise = new Promise(function (resolve, reject) {
-      window.setTimeout(function() {  // Make the function asynchronous
+      window.setTimeout_drawCanvas(function() {  // Make the function asynchronous
         try{
           _init(i, t, c, s);
           _drawCanvas();
@@ -640,7 +640,7 @@ FaceWord.WordManager = (function () {
 
   function _generateWordPool (text) {
     var wordPool  = [],
-        wordArray = text.match(/[A-z]+/g),
+        wordArray = text.match(/[A-zğüşiçöÜĞİŞıÇÖ]++/g),
         stopWords = [
           "a", "b", "c", "ç","d", "e", "f", "g", "ğ","h","ı", "i", "j", "k", "l", "m", "n", "o","ö", "p", "q", "r",
           "s", "ş","t", "u", "ü","v", "w", "x", "y", "z",
