@@ -128,9 +128,11 @@ FaceWord = (function () {
   }
 
   function _validateText (text) {
+	  /*
     if (!text || typeof text !== 'string') {
       throw new Error('Invalid text');
     }
+	*/
 
     return text;
   }
