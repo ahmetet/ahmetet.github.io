@@ -1,13 +1,14 @@
 ahmetet
 <script src="dist/FaceWord.js"></script>
+<canvas id="Kanvascik">
 <script>
 
-var img = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Joan_of_Arc_miniature_graded.jpg/200px-Joan_of_Arc_miniature_graded.jpg",             // Input element. Can be Image or Canvas element
-    text = 'Joan of arc I am the way the truth and the life', // Text to render
-    canvas = '#canvas';      // Output canvas selector
-
-	
-	settings = {
+var img = new Image();        
+img.src="https://cdn.newsapi.com.au/image/v1/0a414f130cd25bcfef732cdf22bc9ebd";    
+var text = 'Joan of arc I am the way the truth and the life'; 
+var canvas = '#Kanvascik';      
+ 
+settings = {
     contrast:      0, 
     blockSize:     5,
     minFontSize:   2,
