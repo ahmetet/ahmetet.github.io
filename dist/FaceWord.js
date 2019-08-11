@@ -1,5 +1,9 @@
 /*! FaceWord - v0.0.5 - 2015-08-18
 * Copyright (c) 2015 Rama Dimasatria; Licensed  */
+/*Ahmet Burçoğlu tarafından düzenlenip geliştirildi..
+Türkçe font desteği getirildi..
+Dinamiklik kazandırıldı..
+*/
 FaceWord = (function () {
   'use strict';
 
@@ -13,7 +17,7 @@ FaceWord = (function () {
     fontWeight:    400,
     colors:        8,
     inverse:       false,
-    darkMode:      false,
+    darkMode:      true,
 
     // Future settings
     orientation:   'mixed'
@@ -636,8 +640,8 @@ FaceWord.WordManager = (function () {
     var wordPool  = [],
         wordArray = text.match(/[A-z]+/g),
         stopWords = [
-          "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-          "s", "t", "u", "v", "w", "x", "y", "z",
+          "a", "b", "c", "ç","d", "e", "f", "g", "ğ","h","ı", "i", "j", "k", "l", "m", "n", "o","ö", "p", "q", "r",
+          "s", "ş","t", "u", "ü","v", "w", "x", "y", "z",
           "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an",
           "and", "any", "are", "as", "at", "be", "because", "been", "but", "by", "can", "cannot",
           "could", "dear", "did", "do", "don", "does", "either", "else", "ever", "every", "for", "from",
