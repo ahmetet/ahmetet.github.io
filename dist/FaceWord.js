@@ -42,7 +42,7 @@ FaceWord = (function () {
     var promise;
 
     promise = new Promise(function (resolve, reject) {
-      window.setTimeout_drawCanvas(function() {  // Make the function asynchronous
+      window.setTimeout(function() {  // Make the function asynchronous
         try{
           _init(i, t, c, s);
           _drawCanvas();
@@ -128,11 +128,9 @@ FaceWord = (function () {
   }
 
   function _validateText (text) {
-	  /*
     if (!text || typeof text !== 'string') {
       throw new Error('Invalid text');
     }
-	*/
 
     return text;
   }
@@ -640,7 +638,7 @@ FaceWord.WordManager = (function () {
 
   function _generateWordPool (text) {
     var wordPool  = [],
-        wordArray = text.match(/[A-zğüşiçöÜĞİŞıÇÖ]++/g),
+        wordArray = text.match(/[A-zğüşiçöÜĞİŞıÇÖ]+/g),
         stopWords = [
           "a", "b", "c", "ç","d", "e", "f", "g", "ğ","h","ı", "i", "j", "k", "l", "m", "n", "o","ö", "p", "q", "r",
           "s", "ş","t", "u", "ü","v", "w", "x", "y", "z",
