@@ -1,7 +1,28 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Hell World</h1>
-<p>nothing</p>
-</body>
-</html>
+<script src="dist/FaceWord.js"></script>
+<script>
+
+var img = joan.jpg,             // Input element. Can be Image or Canvas element
+    text = 'Joan of arc I am the way the truth and the life', // Text to render
+    canvas = '#canvas';      // Output canvas selector
+    settings = {}            // Settings object
+
+FaceWord.run(img, text, canvas, settings);
+
+
+
+settings = {
+    contrast:      0, 
+    blockSize:     5,
+    minFontSize:   2,
+    maxFontSize:   48,
+    imgMaxWidth:   600,
+    fontFamily:    'serif',
+    fontWeight:    400,
+    colors:        8,
+    inverse:       false,
+    darkMode:      false,
+}
+
+</script>
+
+<div id="canvas" style="height:500px; width:500px;"> </div>
