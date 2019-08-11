@@ -1,16 +1,13 @@
+ahmetet
 <script src="dist/FaceWord.js"></script>
 <script>
 
-var img = joan.jpg,             // Input element. Can be Image or Canvas element
+var img = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Joan_of_Arc_miniature_graded.jpg/200px-Joan_of_Arc_miniature_graded.jpg",             // Input element. Can be Image or Canvas element
     text = 'Joan of arc I am the way the truth and the life', // Text to render
     canvas = '#canvas';      // Output canvas selector
-    settings = {}            // Settings object
 
-FaceWord.run(img, text, canvas, settings);
-
-
-
-settings = {
+	
+	settings = {
     contrast:      0, 
     blockSize:     5,
     minFontSize:   2,
@@ -23,6 +20,13 @@ settings = {
     darkMode:      false,
 }
 
+
+FaceWord.run(img, text, canvas, settings);
+
+
+
+
+
 </script>
 
-<div id="canvas" style="height:500px; width:500px;"> </div>
+<div id="canvas"> </div>
