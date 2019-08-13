@@ -476,8 +476,11 @@ FaceWord.ImageProcessor = (function (FaceWord) {
       r = data[i];
       g = data[i+1];
       b = data[i+2];
-
-      value = (r + g + b) / 3;                                    // convert to grayscale
+	
+	  
+	  value = (r * 0.299 + g * 0.587 + b * 0.114);
+ 
+	// value = (r + g + b) / 3;                                    // convert to grayscale
       value = _truncateValue((contrastFactor*(value-128))+128);    // add contrast
       value = value > 120 ? 255 : 0;                              // posterize
 

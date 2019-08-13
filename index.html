@@ -1,28 +1,67 @@
-ahmetet<br>
+<title> M3 WORD PORTRAIT </title>
 <script src="dist/FaceWord.js"></script>
+<input type="file" onchange="previewFile()">
+</br> 
+<input type="text" style="width:100%;" id="caylarr" name="caylarr" value="Bilmezler yalnız yaşamayanlar Nasıl korku verir sessizlik insana İnsan nasıl konuşur kendisiyle Nasıl koşar aynalara Bir cana hasret Bilmezler.">
+</br>
+  Minimum Büyüklük: <input type="number" id="miktar_min" name="miktar_min" min="1" max="100" value="5">
+  <br>
+  Maksimum Büyüklük: <input type="number" id="miktar_max" name="miktar_max" min="1" max="100" value="15">
+  
+  <br>
+<button onclick="myFunction()">Çevir</button><br>
 <canvas id="Kanvascik"></canvas>
-<script>
 
-var img = new Image();        
-img.src="https://ahmetet.github.io/erdem.png";    
-var text = 'GİRİŞİM GENÇ ERDEM MOTİVASYON SANAT BİLİM TEKNOLOJİ KÜBA TEDX"'; 
-var canvas = '#Kanvascik';      
+<img id="Paradise" src="">
+<br>
+<script>
+ var img = new Image();  
  
-settings = {
-    contrast:      0, 
-    blockSize:     5,
-    minFontSize:   2,
-    maxFontSize:   12,
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+           preview.src = reader.result;
+		   img.src=reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+
+  previewFile();  //calls the function named previewFile()
+  
+
+function myFunction() {
+
+	var maxx = parseInt(document.getElementById("miktar_max").value);
+	var minn = parseInt(document.getElementById("miktar_min").value);
+	var text = document.getElementById("caylarr").value;
+	var canvas="#Kanvascik";
+ 
+	settings = {
+	 contrast:      0, 
+    blockSize:     7,
+    minFontSize:   6,
+    maxFontSize:   20,
     imgMaxWidth:   2000,
     fontFamily:    'serif',
     fontWeight:    300,
     colors:        8,
     inverse:       false,
     darkMode:      true,
+	}
+
+	FaceWord.run(img, text, canvas, settings);
+
 }
 
-
-FaceWord.run(img, text, canvas, settings);
+//
 
 
 
@@ -30,4 +69,3 @@ FaceWord.run(img, text, canvas, settings);
 
 </script>
 
-<div id="canvas"> </div>
