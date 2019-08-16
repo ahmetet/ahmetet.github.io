@@ -1,0 +1,214 @@
+<title> M3 WORD PORTRAIT </title>
+<body onload="baslangicta()">
+<script src="dist/FaceWord.js"></script>
+<b>Resim seçiniz:</b><input type="file" onchange="previewFile()"><br>
+</br> 
+<b>Kelime giriniz (boşlukla ayırarak) (ideal Orhan Veli Kanık Yalnızlık şiiri ):</b>
+<input type="text" style="width:25%;" id="caylarr" name="caylarr" value="BİLMELZER YALNIZ YAŞAMAYANLAR NASIL KORKU VERİR SESSİZLİK İNSANA İNSAN NASIL KONUŞUR KENDİSİYLE NASIL KOŞAR AYNALARA BİR CANA HASRET BİLMEZLER.">
+</br>
+<br><!--
+</br>
+  Minimum Büyüklük: <input type="number" id="miktar_min" name="miktar_min" min="2" max="100" value="2"  onchange="SinirDikkat()">
+  <br>
+  
+  ---!-->
+ <b> Font maksimum büyüklük (ideal 25):</b> <input type="number" id="miktar_max" name="miktar_max" min="2" max="100" value="25">
+  
+  <br>
+  </br>
+   <b> Yazı kalınlığı (ideal 300):</b> <input type="number" id="font_veight" name="font_veight" min="0" max="10000" value="300" onchange="MinMaxSinir()">
+  
+  <br>
+ </br>
+ <b> Yazı Fontu:</b>
+<select id="Fontlar">
+	
+	<option>Lucida Console</option>
+	<option>Courier New</option>
+	<option>Verdana</option>
+	<option>Trebuchet MS</option>
+	<option>Tahoma</option>
+	<option>Lucida Sans Unicode</option>
+	<option>Impact</option>
+	<option>Comic Sans MS</option>
+	<option>Arial Black</option>
+	<option>Arial</option>
+	<option>Times New Roman</option>
+	<option>Palatino Linotype</option>
+	<option>Georgia</option>
+	
+</select>
+<br></br>
+<b>Efekt renk seçimi:</b>
+<select id="Renklerr" onchange="secis()">
+	
+	<option>Beyaz</option>
+	<option>Beyaz-Gri</option>
+	<option>Rastgele x çeşit renk</option>
+	
+</select>
+</br>
+<div id="renksecisken">
+  <br>
+  <font style="color:red">Kaç farklı renk olsun : </font><input type="number" id="renkmiktar" name="renkmiktar" min="1" max="255" value="2"  onchange="SinirDikkat2()">
+  <br>
+</div>
+
+<br>
+<button onclick="myFunction()">Çevir</button><br>
+
+<canvas id="Kanvascik" src=""></canvas>
+<img id="Paradise" src="">
+
+<br>
+
+</body>
+ 
+
+
+<script>
+	var cesit_renk=2;
+	var kac_tane=2;
+function baslangicta(){
+
+ document.getElementById("renksecisken").style.display="none";
+ 
+ }
+ 
+function secis(){
+
+    var secilen = document.getElementById('Renklerr').value;
+    if (secilen=="Beyaz"){
+			cesit_renk=2;
+			 document.getElementById("renksecisken").style.display="none";
+    }
+	else if(secilen=="Beyaz-Gri"){
+	cesit_renk=1;
+		 document.getElementById("renksecisken").style.display="none";
+	}
+	else if(secilen=="Rastgele x çeşit renk"){
+	cesit_renk=0;
+	alert("Lütfen renk adet seçimi yapınız");
+	 document.getElementById("renksecisken").style.display="block";
+	
+	}
+}
+ 
+ var img = new Image();  
+ 
+   function previewFile(){
+       var preview = document.querySelector('img'); //selects the query named img
+       var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+       var reader  = new FileReader();
+
+       reader.onloadend = function () {
+        preview.src = reader.result;
+		img.src=reader.result;
+       }
+
+       if (file) {
+           reader.readAsDataURL(file); //reads the data as a URL
+       } else {
+           preview.src = "";
+       }
+  }
+
+ 
+  
+
+function myFunction() {
+
+	var maxx = parseInt(document.getElementById("miktar_max").value);
+//	var minn = parseInt(document.getElementById("miktar_min").value);
+//	if (minn<=2){
+	//minn=2;
+	//}
+	
+
+	var text = document.getElementById("caylarr").value;
+	var canvas="#Kanvascik";
+ 
+	
+var hata=false;
+var fontv_deger=document.getElementById("font_veight").value;
+if (fontv_deger<0 || fontv_deger >2000){
+alert("0 ile 2.000 arasında bir değer olmalı!! :)");
+document.getElementById("font_veight").value=300;
+hata=true;
+}
+else{
+hata=false;
+}
+/*
+if (minn>maxx){
+	alert("Min değer Max değerden Min olmalı dimi:)");
+	minn=2;
+	maxx=25;
+	document.getElementById("miktar_min").value=2;
+	document.getElementById("miktar_max").value=25;
+hata=true;
+	}
+	else{
+	hata=false;
+	}
+*/
+	
+	
+	if (hata==false){
+ 
+	settings = {
+		contrast:      0, //sabit
+		blockSize:     5,//sabit
+		minFontSize:   2,
+		maxFontSize:   maxx,
+		imgMaxWidth:   4000, // sabit bu
+		fontFamily:    '"'+document.getElementById("Fontlar").value+'"',
+		fontWeight:    document.getElementById("font_veight").value, 
+		colors:        2, // sabit
+		inverse:       false,
+		darkMode:      true,
+	
+	}
+
+	kac_tane=document.getElementById("renkmiktar").value;
+	FaceWord.run(img, text, canvas, settings,cesit_renk,kac_tane);
+	
+	}
+	
+/*
+	settings = {
+		contrast:      0, 
+		blockSize:     5,
+		minFontSize:   2,
+		maxFontSize:   30,
+		imgMaxWidth:   4000,
+		fontFamily:    'times',
+		fontWeight:    300,
+		colors:        2,
+		inverse:       false,
+		darkMode:      true,
+	
+	}
+
+	*/
+	
+	
+}
+
+//
+
+
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+</script>
+
+
+ 
