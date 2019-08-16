@@ -3,8 +3,18 @@
 /*Ahmet Burçoğlu tarafından düzenlenip geliştirildi..
 Türkçe font desteği getirildi..
 Dinamiklik kazandırıldı..
+Bayağı içinden geçilip adam edildi
+Yarım yazmışsınız kardeş
+Adam etmek 2 günümü aldı
+Fikir güzel sevdim ama zayıftı alttan biraz destekledik :)
 */
 FaceWord = (function () {
+	
+	var cesit_renk;
+	var kac_tane;
+	var renkler=[];
+	var olustu_mu=false;
+	var say=0;
   'use strict';
 
   var settings = {
@@ -38,14 +48,21 @@ FaceWord = (function () {
    *
    * @return {promise}
    */
-  function run (i, t, c, s) {
+  function run (i, t, c, s,cst,kact) {
+ alert("Lütfen işlem tamamlandı yazısına kadar bekleyiniz!");
+ 
+	  renkler=[];
+	  olustu_mu=false;
+	  say=0;
     var promise;
-
+cesit_renk=cst;
+kac_tane=kact;
     promise = new Promise(function (resolve, reject) {
       window.setTimeout(function() {  // Make the function asynchronous
         try{
           _init(i, t, c, s);
           _drawCanvas();
+		  alert("İşlem tamam!");
         }catch(e){
           reject(e.message);
         }
@@ -54,6 +71,7 @@ FaceWord = (function () {
       }, 1);
     });
 
+	
     return promise;
   }
 
@@ -120,9 +138,11 @@ FaceWord = (function () {
     } else {
       throw new Error('Invalid image');
     }
+ 
+    image.width  = Math.min(img.width, settings.imgMaxWidth);//Math.floor(img.width - Math.floor(img.width/4));//Math.min(img.width, settings.imgMaxWidth);
+    image.height =img.height; //Math.floor(img.height - Math.floor(img.height/4));//img.height;
 
-    image.width  = Math.min(img.width, settings.imgMaxWidth);
-    image.height = img.height;
+ 
 
     return image;
   }
@@ -204,12 +224,36 @@ FaceWord = (function () {
 
     fontSize   = fontMeasure[0];
     fontWidth  = fontMeasure[1];
-    fontHeight = Math.ceil(fontSize * 0.8);
-
+    fontHeight = Math.ceil(fontSize * 0.8); //.8
+ 
     ctx.font         = _setFontProperty(fontSize, settings.fontWeight, settings.fontFamily);
-    ctx.textBaseline = 'hanging';
-    ctx.fillStyle    = color;
-    ctx.fillText(word, x, y, width);
+    ctx.textBaseline = 'hanging'; // hanging
+	
+	
+	if (cesit_renk==0){
+		
+		if(olustu_mu==false){
+			// x cesit renkli bir liste oluştur
+			while (say<kac_tane){
+				renkler.push(getRandomColor());
+				say=say+1;
+			}
+			olustu_mu=true;
+		
+		}
+		 
+		// olustu_mu=true;
+		
+		ctx.fillStyle=renkler[Math.floor(Math.random() * renkler.length)];
+	}
+	else if (cesit_renk==1){
+		 ctx.fillStyle=color;
+	}
+	else if(cesit_renk==2){
+		 ctx.fillStyle="#ffffff";
+	}
+   // ctx.fillStyle    =color;//renkler[Math.floor(Math.random() * renkler.length)];//"#ffffff";//getRandomColor();//color;
+    ctx.fillText(word, x, y, width); // xy
 
     ctx.restore();
 
@@ -227,11 +271,7 @@ FaceWord = (function () {
   }
 
   function _measureFont (word, maxWidth, maxHeight) {
-    var size = settings.minFontSize,
-        wDiff,
-        textWidth,
-        maxTextWidth;
-
+    var size = settings.minFontSize,wDiff,textWidth,maxTextWidth;
     ctx.font  = _setFontProperty(size, settings.fontWeight, settings.fontFamily);
     textWidth = ctx.measureText(word).width;
     wDiff     = maxWidth - textWidth;
@@ -456,40 +496,40 @@ FaceWord.ImageProcessor = (function (FaceWord) {
       settings;
 
   function init () {
-    image    = {};
+    image    = {}; 	
     ctx      = FaceWord.getCanvasContext();
     settings = FaceWord.getSettings();
   }
 
   function process (img) {
-    var contrastRatio = settings.contrast,
-        contrastFactor = (259 * (contrastRatio + 255)) / (255 * (259 - contrastRatio)),
-        imageData,
+   //var contrastRatio = settings.contrast,
+     //  contrastFactor = (259 * (contrastRatio + 255)) / (255 * (259 - contrastRatio)),
+     var   imageData,
         data, r, g, b, value;
-
+ 
     _prepareImage(img);
 
     imageData = ctx.getImageData(0, 0, image.width, image.height);
     data = imageData.data;
-
+/*
     for (var i = 0; i < data.length; i+=4) {
       r = data[i];
       g = data[i+1];
       b = data[i+2];
 	
 	  
-	  value = (r * 0.299 + g * 0.587 + b * 0.114);
+	  value = (r * 0.299 + g * 0.587 + b * 0.114); //ahmet
  
 	// value = (r + g + b) / 3;                                    // convert to grayscale
       value = _truncateValue((contrastFactor*(value-128))+128);    // add contrast
-      value = value > 120 ? 255 : 0;                              // posterize
+      //value = value > 50 ? 255 : 0;                              // posterize
 
       // change original image
       data[i]   = value;
       data[i+1] = value;
       data[i+2] = value;
     }
-
+*/
     return imageData;
   }
 
@@ -583,7 +623,7 @@ FaceWord.ImageProcessor = (function (FaceWord) {
 
     for (var i = colors; i >= 0; i--) {
       value = Math.floor(255 * (i/colors));
-
+	 
       if (settings.darkMode) {
         value = _inverseValue(value);
       }
@@ -637,13 +677,19 @@ FaceWord.WordManager = (function () {
     return word.toUpperCase();
   }
 
+  
   ///////////////// Private Functions
 
   function _generateWordPool (text) {
     var wordPool  = [],
-        wordArray = text.match(/[A-zğüşiçöÜĞİŞıÇÖ]+/g),
+        wordArray = text.match(/[A-zğüşiçöÜĞİŞıÇÖ]+/g), //[A-zğüşiçöÜĞİŞıÇÖ]+
         stopWords = [
-          "a", "b", "c", "ç","d", "e", "f", "g", "ğ","h","ı", "i", "j", "k", "l", "m", "n", "o","ö", "p", "q", "r",
+          "able"
+        ];
+
+		/*
+		
+		"a", "b", "c", "ç","d", "e", "f", "g", "ğ","h","ı", "i", "j", "k", "l", "m", "n", "o","ö", "p", "q", "r",
           "s", "ş","t", "u", "ü","v", "w", "x", "y", "z",
           "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an",
           "and", "any", "are", "as", "at", "be", "because", "been", "but", "by", "can", "cannot",
@@ -663,8 +709,8 @@ FaceWord.WordManager = (function () {
           "what'd", "what's", "when'd", "when'll", "when's", "where'd", "where'll", "where's", "who'd",
           "who'll", "who's", "why'd", "why'll", "why's", "won't", "would've", "wouldn't", "you'd",
           "you'll", "you're", "you've", "very"
-        ];
-
+		  
+		  */
     wordArray.forEach(function(word){
       word = word.toLowerCase();
       if (stopWords.indexOf(word) === -1) {
@@ -704,3 +750,15 @@ FaceWord.WordManager = (function () {
     getWord: getWord
   };
 })(FaceWord || {});
+
+
+ 
+
+ function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
