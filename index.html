@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="build/aframe-ar.js"></script>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+
+</div>
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_5_5;' renderer='precision: medium;'>
+	 
+		<a-entity camera></a-entity>
+		<a-marker type='barcode' value='1'>
+			<a-entity 
+				
+				position="0 0 -2"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+
+		<a-marker type='barcode' value='2'>
+			<a-entity 
+				id="testy"
+				position="0 0 2"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+		</a-marker>
+
+
+		<a-marker type='barcode' value='3'>
+			<a-entity 
+			
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+
+		<a-marker type='barcode' value='4'>
+			<a-entity 
+				id="testy2"
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+		</a-marker>
+	
+	
+		<a-marker type='barcode' value='5'>
+			<a-entity 
+				position="-2 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+
+		<a-marker type='barcode' value='6'>
+			<a-entity 
+				id="testy3"
+				position="2 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+		</a-marker>
+		
+		
+		 
+		<a-marker type='barcode' value='7'>
+			<a-entity 
+				material="color: #0175EC"
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/nkolay/nkolay2.obj);">
+			</a-entity>
+		</a-marker>
+	
+	
+	
+		<a-marker type='barcode' value='8'>
+			<a-entity 
+				id="testy4"
+				position="0 0 -2"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+
+		<a-marker type='barcode' value='9'>
+			<a-entity 
+				
+				position="0 0 2"
+				rotation="-90 0 0"
+				scale="0.01 0.01 0.01"
+				material="color: #0175EC"
+				obj-model="obj: url(logo/nkolay/nkolay2.obj);">
+			</a-entity>
+		</a-marker>
+
+
+		<a-marker type='barcode' value='10'>
+			<a-entity 
+				id="testy5"
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+
+		<a-marker type='barcode' value='11'>
+			<a-entity 
+				
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.01 0.01 0.01"
+				material="color: #0175EC"
+				obj-model="obj: url(logo/nkolay/nkolay2.obj);">
+			</a-entity>
+		</a-marker>
+	
+	
+		<a-marker type='barcode' value='12'>
+			<a-entity 
+				id="testy6"
+				position="-2 0 0"
+				rotation="-90 0 0"
+				scale="0.04 0.04 0.04"
+				obj-model="obj: url(logo/dell/dell.obj); mtl: url(logo/dell/dell.mtl);">
+			</a-entity>
+        </a-marker>
+		
+		<a-marker type='barcode' value='13'>
+			<a-entity 
+				
+				position="2 0 0"
+				rotation="-90 0 0"
+				scale="0.01 0.01 0.01"
+				material="color: #0175EC"
+				obj-model="obj: url(logo/nkolay/nkolay2.obj);">
+			</a-entity>
+		</a-marker>
+	
+	
+		<a-marker type='barcode' value='14'>
+			<a-entity 
+				position="0 0 0"
+				rotation="-90 0 0"
+				scale="0.01 0.01 0.01"
+				material="color: #0175EC"
+				obj-model="obj: url(logo/nkolay/nkolay2.obj);">
+			</a-entity>
+		</a-marker>
+		
+		
+	</a-scene>
+</body>
+</html>
+
+
+<script>
+
+setInterval(Timer1, 1);
+
+var rot=0;
+var son=0;
+
+function Timer1() {
+	entityTest = document.getElementById("testy");
+	entityTest2 = document.getElementById("testy2");
+	entityTest3 = document.getElementById("testy3");
+	entityTest4 = document.getElementById("testy4");
+	entityTest5 = document.getElementById("testy5");
+	entityTest6 = document.getElementById("testy6");
+
+	rot=rot+1;
+	son=rot+" " +rot+ " 0";
+	
+	entityTest.setAttribute("rotation", son);
+	entityTest2.setAttribute("rotation", son);
+	entityTest3.setAttribute("rotation", son);
+	entityTest4.setAttribute("rotation", son);
+	entityTest5.setAttribute("rotation", son);
+	entityTest6.setAttribute("rotation", son);
+}
+</script>
